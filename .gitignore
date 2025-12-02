@@ -8,3 +8,6 @@ scheduler
 
 # OS files
 .DS_Store
+
+# CodeQL files
+_codeql_detected_source_root
