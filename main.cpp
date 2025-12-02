@@ -127,9 +127,7 @@ void solve(const ProblemData& data) {
     int S = data.S;
 
     // State: (visited_mask, last_location, time) -> max_reward, path
-    // Using map for sparse storage
-    // Key: (mask << 20) | (loc << 12) | time
-    // Note: This assumes N <= 20, loc fits in 8 bits, time fits in 12 bits
+    // Using map with tuple keys for sparse storage
 
     struct State {
         int reward;
