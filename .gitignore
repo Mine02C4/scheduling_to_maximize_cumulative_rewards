@@ -1,0 +1,10 @@
+# Build output
+scheduler
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
