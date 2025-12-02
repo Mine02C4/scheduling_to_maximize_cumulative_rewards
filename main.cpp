@@ -13,6 +13,7 @@
  */
 
 #include <algorithm>
+#include <chrono>
 #include <climits>
 #include <cstdlib>
 #include <fstream>
@@ -282,7 +283,19 @@ int main(int argc, char* argv[]) {
               << ", Time slots: " << data.S << std::endl;
     std::cout << std::endl;
 
+    auto start_time = std::chrono::high_resolution_clock::now();
     solve(data);
+    auto end_time = std::chrono::high_resolution_clock::now();
+
+    auto duration_us = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
+    auto duration_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count();
+
+    std::cout << "\n--- Execution Time ---" << std::endl;
+    if (duration_ms > 0) {
+        std::cout << "Solve time: " << duration_ms << " ms (" << duration_us << " μs)" << std::endl;
+    } else {
+        std::cout << "Solve time: " << duration_us << " μs" << std::endl;
+    }
 
     return 0;
 }
