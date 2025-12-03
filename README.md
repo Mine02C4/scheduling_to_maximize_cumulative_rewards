@@ -73,5 +73,5 @@ The algorithm ensures that we can always return to the start point within the ti
 
 ## Limitations
 
-- Maximum 20 locations (due to bitmask representation)
+- Maximum 30 locations (due to 64-bit bitmask representation)
 - Time complexity: O(2^N * N^2 * T) in worst case, but optimized with sparse state storage

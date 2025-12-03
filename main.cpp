@@ -136,24 +136,24 @@ void solve(const ProblemData& data) {
     };
 
     // For small N, use bitmask DP
-    if (N > 20) {
-        std::cerr << "Error: N too large for bitmask DP (max 20)" << std::endl;
+    if (N > 30) {
+        std::cerr << "Error: N too large for bitmask DP (max 30)" << std::endl;
         return;
     }
 
     // dp[mask][loc] stores best (time, reward, path) pairs
     // We need to track time because stay times are time-dependent
-    std::map<std::tuple<int, int, int>, State> dp;
+    std::map<std::tuple<long long, int, int>, State> dp;
 
     // Initial state: at start point (index 0 in travel matrix), time 0, no locations visited
-    dp[{0, -1, 0}] = {0, {}};
+    dp[{0LL, -1, 0}] = {0, {}};
 
     int best_reward = 0;
     std::vector<int> best_path;
 
     // Process states in order of increasing time
-    std::vector<std::tuple<int, int, int>> states_to_process;
-    states_to_process.push_back({0, -1, 0});
+    std::vector<std::tuple<long long, int, int>> states_to_process;
+    states_to_process.push_back({0LL, -1, 0});
 
     size_t process_idx = 0;
     while (process_idx < states_to_process.size()) {
@@ -182,7 +182,7 @@ void solve(const ProblemData& data) {
 
         // Try visiting each unvisited location
         for (int next_loc = 0; next_loc < N; ++next_loc) {
-            if (mask & (1 << next_loc)) continue;  // Already visited
+            if (mask & (1LL << next_loc)) continue;  // Already visited
 
             // Calculate travel time to next location
             int travel;
@@ -204,7 +204,7 @@ void solve(const ProblemData& data) {
             int return_from_next = data.travel_time[next_loc + 1][0];
             if (new_time + return_from_next > T) continue;
 
-            int new_mask = mask | (1 << next_loc);
+            long long new_mask = mask | (1LL << next_loc);
             int new_reward = current.reward + data.rewards[next_loc];
 
             auto key = std::make_tuple(new_mask, next_loc, new_time);
